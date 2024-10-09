@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Book Recommender System to help you find great books based on your preferences.">
+    <title>Book Recommender System</title>
+
+    <!-- Latest compiled and minified CSS from Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            background-color: #1a1a2e;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .navbar {
+            background: linear-gradient(90deg, #00c6ff, #0072ff);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand, .nav-link {
+            color: white !important;
+            font-weight: bold;
+        }
+        .navbar-brand:hover, .nav-link:hover {
+            color: #dcdcdc !important;
+        }
+        h1 {
+            font-size: 3rem;
+            text-align: center;
+            margin: 30px 0;
+            color: #ff6f61;
+        }
+        .form-control {
+            background-color: #fff;
+            border: 2px solid #0072ff;
+            border-radius: 10px;
+            color: black;
+            padding: 10px;
+        }
+        .btn-warning {
+            background-color: #ff6f61;
+            border: none;
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease;
+        }
+        .btn-warning:hover {
+            background-color: #ff9478;
+            box-shadow: 0px 4px 12px rgba(255, 111, 97, 0.3);
+        }
+        .card {
+            background-color: #2b2b4f;
+            border: none;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .card-img-top {
+            border-radius: 10px 10px 0 0;
+            max-height: 200px;
+            object-fit: cover;
+        }
+        .card-body p, .card-body h4 {
+            color: #e0e0e0;
+            margin-bottom: 10px;
+        }
+        .footer {
+            margin-top: 50px;
+            padding: 20px 0;
+            text-align: center;
+            background-color: #161625;
+            color: #7a7a9d;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">My Book Recommender</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/recommend">Recommend</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Recommend Books</h1>
+                <form action="/recommend_books" method="post">
+                    <input name="user_input" type="text" class="form-control" placeholder="Enter your favorite book..."><br>
+                    <input type="submit" class="btn btn-lg btn-warning" value="Find Recommendations">
+                </form>
+            </div>
+
+            {% if data %}
+            {% for i in data %}
+            <div class="col-md-4 col-lg-3 col-sm-6 my-4">
+                <div class="card h-100 text-center">
+                    <img class="card-img-top" src="{{i[2]}}" alt="Book Image">
+                    <div class="card-body">
+                        <p>{{i[0]}}</p>
+                        <h4>{{i[1]}}</h4>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 My Book Recommender | All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
